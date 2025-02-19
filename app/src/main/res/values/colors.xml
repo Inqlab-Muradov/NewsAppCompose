@@ -8,4 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="searchPlaceHolder">#CDC8C8</color>
+    <color name="sectionBoxBg">#e7e7e7</color>
+    <color name="authorNameColor">#0AA7FF</color>
+    <color name="newsContextColor">#89969C</color>
 </resources>

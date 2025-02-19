@@ -1,4 +1,4 @@
-package com.example.newsappcompose.presentation.home.components
+package com.example.newsappcompose.presentation.favourites.companents
 
 
 import androidx.compose.foundation.background
@@ -34,28 +34,18 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.newsappcompose.R
 import com.example.newsappcompose.domain.model.NewsModel
+import com.example.newsappcompose.presentation.favourites.FavouritesUiState
 import com.example.newsappcompose.presentation.home.HomeUiState
 
 @Composable
-fun NewsColumn(homeUiState: HomeUiState, onClick: (newsItem: NewsModel) -> Unit) {
+fun FavNewsColumn(favouritesUiState: FavouritesUiState, onClick: (newsItem: NewsModel) -> Unit) {
     LazyColumn(
-        contentPadding = PaddingValues(vertical = 24.dp),
+        contentPadding = PaddingValues(vertical = 24.dp, horizontal = 21.dp),
         verticalArrangement = Arrangement.spacedBy(24.dp)
     ) {
-        if  (homeUiState.searchQuery.isEmpty()){
-            homeUiState.usNewsList?.let { list ->
-                items(list) { item ->
-                    LazyColumnItem(newsColumnItem = item, onClick)
-                }
-            }
-        }else{
-            homeUiState.filteredUsNews?.let { filteredList->
-                items(filteredList){item->
-                    LazyColumnItem(newsColumnItem = item,onClick)
-                }
-            }
+        items(favouritesUiState.savedList){item->
+            LazyColumnItem(item,onClick)
         }
-
     }
 }
 

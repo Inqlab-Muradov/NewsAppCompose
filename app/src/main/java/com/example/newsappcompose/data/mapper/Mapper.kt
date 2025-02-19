@@ -1,17 +1,17 @@
 package com.example.newsappcompose.data.mapper
 
 import com.example.newsappcompose.data.dto.Article
-import com.example.newsappcompose.data.dto.NewsDto
-import com.example.newsappcompose.domain.Model.NewsModel
+import com.example.newsappcompose.domain.model.NewsModel
 
 fun List<Article>.toNewsModel() = map {
     NewsModel(
-        source = it.source,
-        description = it.description,
-        title = it.title,
-        content = it.content,
-        author = it.author,
-        urlToImage = it.urlToImage
+        source = it.source?.name.orEmpty(),
+        description = it.description.orEmpty(),
+        title = it.title.orEmpty(),
+        content = it.content.orEmpty(),
+        author = it.author.orEmpty(),
+        urlToImage = it.urlToImage.orEmpty(),
+        publishedAt = it.publishedAt.orEmpty()
     )
 }
 

@@ -11,4 +11,9 @@ interface ApiService {
     suspend fun getWsjNews(
         @Query("domains") domains:String = "wsj.com", @Query("apiKey") apikey : String = API_KEY
     ) : NewsDto
+
+    @GET("top-headlines")
+    suspend fun getUsNews(
+        @Query("country") country:String = "us" ,@Query("category") category : String = "business" , @Query("apiKey") apiKey: String = API_KEY
+    ) :NewsDto
 }

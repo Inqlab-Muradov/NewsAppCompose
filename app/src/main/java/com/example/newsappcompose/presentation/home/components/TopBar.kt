@@ -27,7 +27,7 @@ fun TopBar(modifier:Modifier = Modifier){
         modifier = modifier
             .fillMaxWidth()
             .padding(top = 33.dp, start = 24.dp)
-            .statusBarsPadding(),
+            .statusBarsPadding().background(Color.White),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(

@@ -2,6 +2,8 @@ package com.example.newsappcompose.presentation.home.components
 
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -10,6 +12,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -24,12 +27,12 @@ fun SetBottomBar(
     selectedIndex: Int,
     onSelectedIndexChanged: (Int) -> Unit
 ) {
-    Column {
+    Column (verticalArrangement = Arrangement.Top){
         HorizontalDivider(modifier = Modifier.padding(bottom = 6.dp),
-            thickness = 2.dp, color = Color.Black)
+            thickness = 1.5.dp, color = Color.Black
+        )
         Row(
-            modifier = Modifier
-                .navigationBarsPadding()
+            modifier = Modifier.navigationBarsPadding()
         ) {
             iconList.forEachIndexed { index, iconItem ->
                 ClickableIcon(
@@ -38,18 +41,23 @@ fun SetBottomBar(
                     unselectedIcon = iconItem.unSelectedImage,
                     modifier = Modifier
                         .weight(0.5f)
-                        .clickable {
-                            onSelectedIndexChanged(index)
-                            when (index) {
-                                0 -> {
-                                    onNavigateTo(ScreenRoute.ScreenHome)
-                                }
-
-                                1 -> {
-                                    onNavigateTo(ScreenRoute.ScreenFav)
+                        .clickable(
+                            indication = null,
+                            interactionSource = remember { MutableInteractionSource() },
+                            onClick = {
+                                onSelectedIndexChanged(index)
+                                when (index) {
+                                    0 -> {
+                                        if (selectedIndex == 0) return@clickable
+                                        onNavigateTo(ScreenRoute.ScreenHome)
+                                    }
+                                    1 -> {
+                                        if (selectedIndex == 1) return@clickable
+                                        onNavigateTo(ScreenRoute.ScreenFav)
+                                    }
                                 }
                             }
-                        }
+                        )
                 )
             }
         }
@@ -67,7 +75,7 @@ fun ClickableIcon(
     Icon(
         modifier = modifier.size(32.dp),
         painter = if (isSelected) painterResource(id = selectedIcon) else painterResource(id = unselectedIcon),
-        contentDescription = null
+        contentDescription = null,
     )
 }
 

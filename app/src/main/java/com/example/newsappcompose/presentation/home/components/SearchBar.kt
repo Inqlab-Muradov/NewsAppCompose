@@ -23,12 +23,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.newsappcompose.R
+import com.example.newsappcompose.presentation.home.HomeIntent
+import com.example.newsappcompose.presentation.home.HomeUiState
+import com.example.newsappcompose.presentation.home.HomeViewModel
 
 @Composable
-fun SearchBar() {
-    var text by remember {
-        mutableStateOf("")
-    }
+fun SearchBar(onSearchQuery: (String) -> Unit, state: HomeUiState) {
     var isActive by remember {
         mutableStateOf(false)
     }
@@ -51,13 +51,13 @@ fun SearchBar() {
             fontSize = 12.sp,
             color = Color.Black
         ),
-        value = text,
+        value = state.searchQuery,
         onValueChange = { newValue ->
-            text = newValue
+           onSearchQuery(newValue)
         },
         maxLines = 1,
         decorationBox = { innerTextField ->
-            if (text.isEmpty() && !isActive) {
+            if (state.searchQuery.isEmpty() && !isActive) {
                 Text(
                     text = "Search...", style = TextStyle(
                         fontSize = 12.sp,
@@ -71,8 +71,8 @@ fun SearchBar() {
     )
 }
 
-@Preview(showBackground = true)
-@Composable
-private fun Preview() {
-    SearchBar()
-}
+//@Preview(showBackground = true)
+//@Composable
+//private fun Preview() {
+//    SearchBar()
+//}
